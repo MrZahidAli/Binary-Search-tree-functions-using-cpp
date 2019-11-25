@@ -89,7 +89,7 @@ class linkList{
 			if(temp == NULL){
 				return 0;
 			}else if(temp -> right == NULL){
-				cout << endl << "maximum in BST: " << temp -> data;
+				cout << endl << "maximum in BST: " << temp -> data << endl;
 				return temp;
 			}else{
 				maximum(temp -> right);
@@ -101,7 +101,7 @@ class linkList{
 				cout << endl << "Value is not found in BST!";
 				return 0;
 			}else if(value == temp -> data){
-				cout << endl << "value is found that is: " << temp -> data;
+				cout << endl << "value is found that is: " << temp -> data << endl;
 				return 0;
 			}else{
 				if(value < temp -> data){
@@ -114,50 +114,48 @@ class linkList{
 		}
 //successor of an element in BST
 
-void inordersuccessor(node* temp) 
-{
-    // Case1: If right child is not NULL 
-    if (temp->right != NULL) 
-    { 
-        node *inorderSucc = minimum(temp->right); 
-        cout<<"Inorder Successor of "<<temp->data<<" is "; 
-        cout<<inorderSucc->data<<"\n"; 
-    } 
+	void inordersuccessor(node* temp) {
+   		// Case1: If right child is not NULL 
+		if (temp->right != NULL){ 
+			node *inorderSucc = minimum(temp->right); 
+     	   	cout<<"Inorder Successor of "<<temp->data<<" is "; 
+       		cout<<inorderSucc->data<<"\n"; 
+    	} 
   
-    // Case2: If right child is NULL 
-    if (temp->right == NULL){
-		while( temp -> previous -> data < temp -> data){
-			temp = temp -> previous;
-		}
-		cout << "successor is: "<<temp -> data;
-    }
-}
+ 	   // Case2: If right child is NULL 
+    	if (temp->right == NULL){
+			while( temp -> previous -> data < temp -> data){
+				temp = temp -> previous;
+			}
+			cout << endl << "successor is: " << temp -> previous -> data;
+   		}
+	}
 
-		int successor(int value, node* temp){
-			if(temp == NULL){
-				cout << endl << "Value is not found in BST!";
-				return 0;
-			}else if(value == temp -> data){
-				inordersuccessor(temp);
+	int successor(int value, node* temp){
+		if(temp == NULL){
+			cout << endl << "Value is not found in BST!";
+			return 0;
+		}else if(value == temp -> data){
+			inordersuccessor(temp);
+		}else{
+			if(value < temp -> data){
+				successor(value, temp -> left);
 			}else{
-				if(value < temp -> data){
-					successor(value, temp -> left);
-				}else{
-					successor(value, temp -> right);
-				}
+				successor(value, temp -> right);
 			}
 		}
+	}
 };
 int main(){
 	linkList B;
-	B.creatList(1);
-	B.creatList(2);
-	B.creatList(3);
-	B.creatList(4);
 	B.creatList(5);
-	B.creatList(6);
+	B.creatList(3);
 	B.creatList(7);
-	B.creatList(8);
+	B.creatList(1);
+	B.creatList(4);
+	B.creatList(0);
+//	B.creatList(7);
+//	B.creatList(8);
 	cout << endl << "inorder list: ";
 	B.printInorder(B.root);
 	cout << endl << "postorder list: ";
@@ -167,7 +165,7 @@ int main(){
 //	B.minimum(B.root);
 //	B.maximum(B.root);
 //	B.search(1, B.root);
-//	B.successor(3, B.root);
+	B.successor(7, B.root);
 //	B.test();
 	return 0;
 }
